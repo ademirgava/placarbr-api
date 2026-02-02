@@ -1,4 +1,4 @@
-package com.br.placarbr_api.domain.usuario;
+package com.br.placarbr_api.domain.model;
 
 import java.time.LocalDate;
 import java.util.Collection;
