@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.placarbr_api.domain.usuario.DadosAutenticacao;
-import com.br.placarbr_api.domain.usuario.Usuario;
+import com.br.placarbr_api.domain.dto.AutenticacaoDTO;
+import com.br.placarbr_api.domain.model.Usuario;
 import com.br.placarbr_api.infra.security.DadosToken;
 import com.br.placarbr_api.infra.security.TokenService;
 
@@ -28,7 +28,7 @@ public class AutenticacaoController {
 	private TokenService tokenService;
 
 	@PostMapping
-	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+	public ResponseEntity efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
 		Authentication authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
 		Authentication authenticate = manager.authenticate(authenticationToken);
 

@@ -6,4 +6,4 @@ CREATE TABLE usuarios(
 	data_nascimento DATE 
 );
 
-insert into placarbr.usuarios values(1, 'juninhogava', '$2a$12$FzTKPfeoxdhWOBdTyriQt.VTiCS.g9lGsuBDlq5HERXlY3MpSH2wS', 'Ademir Gava Jr', '1984-10-25');
+insert into placarbr.usuarios values(1, 'juninhogava', '$2a$12$8x1iEwhWWFSxlqSIlzVR.eLmzer0Cpj.dr.5s52UcpM4UoS49ywO2', 'Ademir Gava Jr', '1984-10-25');
