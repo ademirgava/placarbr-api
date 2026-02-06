@@ -1,5 +1,5 @@
 CREATE TABLE enderecos (
-	id int AUTO_INCREMENT NOT NULL UNIQUE,
+	id BIGINT AUTO_INCREMENT NOT NULL UNIQUE,
 	logradouro varchar(255) NOT NULL,
 	numero varchar(10) NOT NULL,
 	bairro varchar(125) NOT NULL,

@@ -9,7 +9,6 @@ public record EquipeAtualizaDTO(
 		Long id,
 		String nome,
 		String sigla,
-		byte[] logomarca,
 		LocalDate dataFundacao,
 		String corPrincipal,
 		String corSecundaria,
