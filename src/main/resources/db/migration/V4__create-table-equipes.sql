@@ -8,7 +8,7 @@ CREATE TABLE equipes(
     data_criacao DATETIME ,
     cor_principal VARCHAR(25) NOT NULL,
     cor_secundaria VARCHAR(25) NOT NULL,
-    endereco_id int
+    endereco_id BIGINT
 );
 
 ALTER TABLE equipes ADD CONSTRAINT equipes_fk7 FOREIGN KEY (endereco_id) REFERENCES enderecos(id);

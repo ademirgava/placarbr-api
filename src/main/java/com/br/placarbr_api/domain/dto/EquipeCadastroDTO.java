@@ -11,7 +11,7 @@ public record EquipeCadastroDTO(
 		@Size(min = 6)
 		String nome,
 		@NotBlank
-		@Size(min = 2, max = 2)
+		@Size(min = 2, max = 3)
 		String sigla,
 		LocalDate dataFundacao,
 		@NotBlank

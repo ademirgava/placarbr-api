@@ -49,4 +49,8 @@ public class JogadorService {
 		jogador.atualizar(dto);
 		return new JogadorDetalhamentoDTO(jogador);
 	}
+
+	public Jogador buscarJogadorReference(Long jogadorId) {
+		return repository.getReferenceById(jogadorId);
+	}
 }

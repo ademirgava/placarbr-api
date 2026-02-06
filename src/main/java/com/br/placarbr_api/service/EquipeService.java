@@ -42,6 +42,10 @@ public class EquipeService {
 	public EquipeDetalhamentoDTO buscarEquipe(Long id) {
 		return new EquipeDetalhamentoDTO(repository.getReferenceById(id));
 	}
+	
+	public Equipe buscarEquipePeloIdReference(Long id) {
+		return repository.getReferenceById(id);
+	}
 
 	public EquipeDetalhamentoDTO atualizarEquipe(@Valid EquipeAtualizaDTO dto) {
 		Equipe equipe = repository.getReferenceById(dto.id());

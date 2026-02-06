@@ -3,6 +3,8 @@ package com.br.placarbr_api.domain.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.br.placarbr_api.domain.dto.JogadorAtualizaDTO;
 import com.br.placarbr_api.domain.dto.JogadorCadastroDTO;
@@ -14,6 +16,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
@@ -59,6 +62,9 @@ public class Jogador {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Endereco endereco;
+
+	@OneToMany(mappedBy = "jogador")
+	private List<CampeonatoJogador> campeonatoJogadores = new ArrayList<>();
 
 	public Jogador(JogadorCadastroDTO dto, Endereco endereco) {
 		this.nome = dto.nome();
