@@ -11,6 +11,7 @@ import com.br.placarbr_api.domain.dto.CampeonatoJogadoresDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoTimeDetalhamentoDTO;
 import com.br.placarbr_api.domain.model.CampeonatoJogador;
 import com.br.placarbr_api.domain.model.CampeonatoTime;
+import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.CampeonatoJogadoresRepository;
 
 @Service
@@ -27,9 +28,13 @@ public class CampeonatoJogadoresService {
 	private JogadorService jogadorService;
 	
 	public CampeonatoTimeDetalhamentoDTO cadastrarCampeonatoJogador(CampeonatoJogadorCadastroDTO dto) {
+		if (repository.existsByJogadorIdAndCampeonatoTimeId(dto.jogadorId(), dto.campeonatoTimeId())) {
+			throw new ValidacaoException("Jogador já cadastrado para este time!");
+		};
+		
 		CampeonatoJogador campeonatoJogador = new CampeonatoJogador(dto);
 		campeonatoJogador.setJogador(jogadorService.buscarJogadorReference(dto.jogadorId()));
-		campeonatoJogador.setCampeonatoTime(campeonatoTimesService.cadastrarTimeReference(dto.campeonatoTimeId()));
+		campeonatoJogador.setCampeonatoTime(campeonatoTimesService.buscarCampeonatoTimePorId(dto.campeonatoTimeId()));
 		repository.save(campeonatoJogador);
 		return new CampeonatoTimeDetalhamentoDTO(campeonatoJogador.getCampeonatoTime());
 	}
@@ -38,4 +43,8 @@ public class CampeonatoJogadoresService {
 		List<CampeonatoJogador> jogadores = repository.findAllByCampeonatoTime(campeonatoTime);
 		return jogadores.stream().map(CampeonatoJogadoresDetalhamentoDTO::new).toList();
 	} 
+	
+	public void deletarJogadoresPorCampeonatoTimeId(Long id) {
+		repository.deleteByCampeonatoTimeId(id);
+	}
 }

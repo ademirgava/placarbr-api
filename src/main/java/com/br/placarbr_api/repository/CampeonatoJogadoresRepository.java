@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.br.placarbr_api.domain.model.CampeonatoJogador;
 import com.br.placarbr_api.domain.model.CampeonatoTime;
 
-public interface CampeonatoJogadoresRepository extends JpaRepository<CampeonatoJogador, Long>{
+public interface CampeonatoJogadoresRepository extends JpaRepository<CampeonatoJogador, Long> {
 
 	List<CampeonatoJogador> findAllByCampeonatoTime(CampeonatoTime campeonatoTime);
+
+	Boolean existsByJogadorIdAndCampeonatoTimeId(Long jogadorId, Long campeonatoTimeId);
+
+	void deleteByCampeonatoTimeId(Long id);
 
 }

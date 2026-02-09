@@ -52,7 +52,7 @@ public class CampeonatoFaseController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CampeonatoFaseListagemDTO> buscarPorId(@PathVariable Long id) {
-		return ResponseEntity.ok(service.buscarFaseePorId(id));
+		return ResponseEntity.ok(service.buscarFasePorId(id));
 	}
 
 	@PutMapping
