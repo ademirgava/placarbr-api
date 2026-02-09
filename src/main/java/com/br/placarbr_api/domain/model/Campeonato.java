@@ -39,6 +39,9 @@ public class Campeonato {
 	
     @OneToMany(mappedBy = "campeonato")
     private List<CampeonatoTime> times = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "campeonato")
+    private List<CampeonatoFase> fases = new ArrayList<>();
 
 	public Campeonato(CampeonatoCadastroDTO dto) {
 		this.nome = dto.nome();
