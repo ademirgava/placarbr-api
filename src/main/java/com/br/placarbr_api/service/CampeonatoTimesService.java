@@ -30,7 +30,7 @@ public class CampeonatoTimesService {
 	
 	public CampeonatoTimeDetalhamentoDTO cadastrarTime(CampeonatoTimesCadastroDTO dto) {
 		CampeonatoTime campeonatoTime = new CampeonatoTime();
-		campeonatoTime.setCampeonato(campeonatoService.buscarReferenceCampeonatoPeloId(dto.campeonatoId()));
+		campeonatoTime.setCampeonato(campeonatoService.buscarCampeonatoPorId(dto.campeonatoId()));
 		campeonatoTime.setEquipe(equipeService.buscarEquipePeloIdReference(dto.equipeId()));
 		CampeonatoTime novoCampeonatoTime = repository.save(campeonatoTime);
 		return new CampeonatoTimeDetalhamentoDTO(novoCampeonatoTime);

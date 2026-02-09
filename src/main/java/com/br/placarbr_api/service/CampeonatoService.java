@@ -9,6 +9,7 @@ import com.br.placarbr_api.domain.dto.CampeonatoCadastroDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoListagemDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
+import com.br.placarbr_api.infra.exception.ValidacaoException;
 
 @Service
 public class CampeonatoService {
@@ -24,12 +25,13 @@ public class CampeonatoService {
 		return new CampeonatoDetalhamentoDTO(repository.getReferenceById(id));
 	}
 	
-	public Campeonato buscarReferenceCampeonatoPeloId(Long id) {
-		return repository.getReferenceById(id);
+	public Campeonato buscarCampeonatoPorId(Long id) {
+		return repository.findById(id).orElseThrow(()-> new ValidacaoException("Campeonato com id: " + id + " não existe!"));
 	}
 
 	public CampeonatoDetalhamentoDTO cadastrarCampeonato(CampeonatoCadastroDTO dto) {
 		Campeonato campeonato = repository.save(new Campeonato(dto));
 		return new CampeonatoDetalhamentoDTO(campeonato);
 	}
+
 }
