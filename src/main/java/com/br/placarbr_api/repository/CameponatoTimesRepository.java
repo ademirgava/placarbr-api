@@ -6,4 +6,6 @@ import com.br.placarbr_api.domain.model.CampeonatoTime;
 
 public interface CameponatoTimesRepository extends JpaRepository<CampeonatoTime, Long>{
 
+	boolean existsByCampeonatoIdAndEquipeId(Long campeonatoId, Long equipeId);
+
 }

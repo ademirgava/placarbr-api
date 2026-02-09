@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.br.placarbr_api.domain.dto.CampeonatoJogadorCadastroDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoTimeDetalhamentoDTO;
+import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.service.CampeonatoJogadoresService;
 
 import jakarta.transaction.Transactional;
@@ -25,8 +26,12 @@ public class CampeonatoJogadoresController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<CampeonatoTimeDetalhamentoDTO> cadastrarCampeonatoJogador(@RequestBody @Valid CampeonatoJogadorCadastroDTO dto, UriComponentsBuilder builder) {
-		CampeonatoTimeDetalhamentoDTO campeonatoTimeDetalhamentoDTO = service.cadastrarCampeonatoJogador(dto);
-		var uri = builder.path("/campoenoto/{id}").buildAndExpand(campeonatoTimeDetalhamentoDTO.campeonatoListagemDTO().id()).toUri();
-		return ResponseEntity.created(uri).body(campeonatoTimeDetalhamentoDTO);
+		try {
+			CampeonatoTimeDetalhamentoDTO campeonatoTimeDetalhamentoDTO = service.cadastrarCampeonatoJogador(dto);
+			var uri = builder.path("/campoenoto/{id}").buildAndExpand(campeonatoTimeDetalhamentoDTO.campeonatoListagemDTO().id()).toUri();
+			return ResponseEntity.created(uri).body(campeonatoTimeDetalhamentoDTO);
+		} catch (ValidacaoException e) {
+			throw new ValidacaoException(e.getMessage());
+		}
 	}
 }

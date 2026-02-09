@@ -12,6 +12,7 @@ import com.br.placarbr_api.domain.dto.JogadorDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.JogadorListagemDTO;
 import com.br.placarbr_api.domain.model.Endereco;
 import com.br.placarbr_api.domain.model.Jogador;
+import com.br.placarbr_api.infra.exception.NotFoundExecption;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.JogadorRepository;
 
@@ -51,6 +52,6 @@ public class JogadorService {
 	}
 
 	public Jogador buscarJogadorReference(Long jogadorId) {
-		return repository.getReferenceById(jogadorId);
+		return repository.findById(jogadorId).orElseThrow(()-> new NotFoundExecption("Jogador com id: "+jogadorId+" não encontrado!"));
 	}
 }
