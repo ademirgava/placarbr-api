@@ -36,18 +36,21 @@ public class Campeonato {
 	private String descricao;
 	private LocalDate dataInicio;
 	private LocalDateTime dataCriacao;
+
+	@OneToMany(mappedBy = "campeonato")
+	private List<CampeonatoTime> times = new ArrayList<>();
+
+	@OneToMany(mappedBy = "campeonato")
+	private List<CampeonatoFase> fases = new ArrayList<>();
 	
-    @OneToMany(mappedBy = "campeonato")
-    private List<CampeonatoTime> times = new ArrayList<>();
-    
-    @OneToMany(mappedBy = "campeonato")
-    private List<CampeonatoFase> fases = new ArrayList<>();
+	@OneToMany(mappedBy = "campeonato")
+	private List<CampeonatoJogo> jogos = new ArrayList<>();
 
 	public Campeonato(CampeonatoCadastroDTO dto) {
 		this.nome = dto.nome();
 		this.descricao = dto.descricao();
 		this.dataInicio = dto.dataInicio();
-		
+
 		this.dataCriacao = LocalDateTime.now();
 	}
 

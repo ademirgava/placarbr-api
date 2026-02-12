@@ -1,5 +1,8 @@
 package com.br.placarbr_api.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.br.placarbr_api.domain.dto.CampeonatoFaseAtualizaDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseCadastroDTO;
 
@@ -11,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -45,6 +49,9 @@ public class CampeonatoFase {
 	private Integer quantidadeGrupos;
 	private Integer quantidadeTimes;
 	private Boolean idaVolta;
+	
+	@OneToMany(mappedBy = "campeonatoFase")
+	private List<CampeonatoJogo> jogos = new ArrayList<CampeonatoJogo>();
 
 	public CampeonatoFase(CampeonatoFaseCadastroDTO dto, Campeonato campeonato) {
 		this.nome = dto.nome();

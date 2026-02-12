@@ -67,7 +67,7 @@ public class CampeonatoFaseService {
 				.map(CampeonatoFaseListagemDTO::new).toList();
 	}
 	
-	private CampeonatoFase buscarCampeonatoFasePorId(Long id) {
+	public CampeonatoFase buscarCampeonatoFasePorId(Long id) {
 		return repository.findById(id).orElseThrow(() -> new NotFoundExecption("Fase com id: "+id+" não encontrado!"));
 	}
 }

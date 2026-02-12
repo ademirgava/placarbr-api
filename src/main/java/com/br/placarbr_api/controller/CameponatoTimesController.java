@@ -1,5 +1,7 @@
 package com.br.placarbr_api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +40,11 @@ public class CameponatoTimesController {
 	@GetMapping("/time/{id}")
 	public ResponseEntity<CampeonatoTimeJogadoresDTO> listarJogadoresTime(@PathVariable Long id) {
 		return ResponseEntity.ok(service.listarJogadoresTime(id));
+	}
+	
+	@GetMapping("/campeonato/{id}")
+	public ResponseEntity<List<CampeonatoTimeDetalhamentoDTO>> listarCampeonatoTimesPorCampeonato(@PathVariable Long id) {
+		return ResponseEntity.ok(service.listarCampeonatoTimesPorCampeonato(id));
 	}
 	
 	@DeleteMapping("/{id}")
