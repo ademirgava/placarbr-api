@@ -51,13 +51,13 @@ public class JogadorController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity detalhamentoJogador(@PathVariable Long id) {
+	public ResponseEntity<JogadorDetalhamentoDTO> detalhamentoJogador(@PathVariable Long id) {
 		return ResponseEntity.ok(jogadorService.buscarJogador(id));
 	}
 	
 	@PutExchange
 	@Transactional
-	public ResponseEntity atualizarJogadro(@RequestBody @Valid JogadorAtualizaDTO dto) {
+	public ResponseEntity<JogadorDetalhamentoDTO> atualizarJogadro(@RequestBody @Valid JogadorAtualizaDTO dto) {
 		return ResponseEntity.ok(jogadorService.atualizarJogador(dto));
 	}
 }

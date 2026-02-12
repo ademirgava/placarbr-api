@@ -58,4 +58,12 @@ public class CampeonatoTimesService {
 		campeonatoJogadoresService.deletarJogadoresPorCampeonatoTimeId(id);
 		repository.delete(campeonatoTime);
 	}
+
+	public CampeonatoTime buscarCampeonatoTimePorIdAndCampeonatoId(Long cameponatoTimeId, Long campeonatoId) {
+		return repository.findByIdAndCampeonatoId(cameponatoTimeId, campeonatoId).orElseThrow(() -> new NotFoundExecption("Time com id: "+cameponatoTimeId+" não encontrado para o cameponato com id: "+campeonatoId));
+	}
+
+	public List<CampeonatoTimeDetalhamentoDTO> listarCampeonatoTimesPorCampeonato(Long id) {
+		return repository.findAllByCampeonatoId(id).stream().map(CampeonatoTimeDetalhamentoDTO::new).toList();
+	}
 }
