@@ -12,8 +12,6 @@ public interface CameponatoJogoRepository extends JpaRepository<CampeonatoJogo, 
 
 	boolean existsByTimeMandanteIdOrTimeVisitanteIdAndRodada(Long mandateId, Long vistanteId, Integer rodada);
 
-	boolean existsByTimeVisitanteIdAndRodada(Long cameponatoTimeMandateId, Integer rodada);
-
 	Page<CampeonatoJogo> findByCampeonatoId(Long campeonatoId, Pageable paginacao);
 
 }
