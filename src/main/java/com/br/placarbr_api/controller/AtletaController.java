@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.service.annotation.PutExchange;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.br.placarbr_api.domain.dto.JogadorAtualizaDTO;
-import com.br.placarbr_api.domain.dto.JogadorCadastroDTO;
-import com.br.placarbr_api.domain.dto.JogadorDetalhamentoDTO;
-import com.br.placarbr_api.domain.dto.JogadorListagemDTO;
+import com.br.placarbr_api.domain.dto.AtletaAtualizaDTO;
+import com.br.placarbr_api.domain.dto.AtletaCadastroDTO;
+import com.br.placarbr_api.domain.dto.AtletaDetalhamentoDTO;
+import com.br.placarbr_api.domain.dto.AtletaListagemDTO;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
-import com.br.placarbr_api.service.JogadorService;
+import com.br.placarbr_api.service.AtletaService;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/jogador")
-public class JogadorController {
+@RequestMapping("/atleta")
+public class AtletaController {
 
 	@Autowired
-	private JogadorService jogadorService;
+	private AtletaService atletaService;
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity criarJogador(@RequestBody @Valid JogadorCadastroDTO dto, UriComponentsBuilder builder) {
+	public ResponseEntity criarJogador(@RequestBody @Valid AtletaCadastroDTO dto, UriComponentsBuilder builder) {
 		try {
-			JogadorDetalhamentoDTO jogador = jogadorService.cadastrar(dto);
+			AtletaDetalhamentoDTO jogador = atletaService.cadastrar(dto);
 			var uri = builder.path("/jogadores/{id}").buildAndExpand(jogador.id()).toUri();
 			return ResponseEntity.created(uri).body(jogador);
 		} catch (ValidacaoException exception) {
@@ -46,18 +46,18 @@ public class JogadorController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<JogadorListagemDTO>> listarJogadores(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao) {
-		return ResponseEntity.ok(jogadorService.listarJogadores(paginacao));
+	public ResponseEntity<Page<AtletaListagemDTO>> listarJogadores(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao) {
+		return ResponseEntity.ok(atletaService.listarAtletas(paginacao));
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<JogadorDetalhamentoDTO> detalhamentoJogador(@PathVariable Long id) {
-		return ResponseEntity.ok(jogadorService.buscarJogador(id));
+	public ResponseEntity<AtletaDetalhamentoDTO> detalhamentoJogador(@PathVariable Long id) {
+		return ResponseEntity.ok(atletaService.buscarAtleta(id));
 	}
 	
 	@PutExchange
 	@Transactional
-	public ResponseEntity<JogadorDetalhamentoDTO> atualizarJogadro(@RequestBody @Valid JogadorAtualizaDTO dto) {
-		return ResponseEntity.ok(jogadorService.atualizarJogador(dto));
+	public ResponseEntity<AtletaDetalhamentoDTO> atualizarJogadro(@RequestBody @Valid AtletaAtualizaDTO dto) {
+		return ResponseEntity.ok(atletaService.atualizarAtleta(dto));
 	}
 }

@@ -31,7 +31,7 @@ public class CampeonatoJogador {
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Jogador jogador;
+	private Atleta atleta;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private CampeonatoTime campeonatoTime;

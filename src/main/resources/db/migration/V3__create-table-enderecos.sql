@@ -11,4 +11,4 @@ CREATE TABLE enderecos (
 );
 
 
-ALTER TABLE jogadores ADD CONSTRAINT jogadores_fk7 FOREIGN KEY (endereco_id) REFERENCES enderecos(id);
+ALTER TABLE atletas ADD CONSTRAINT atletas_fk7 FOREIGN KEY (endereco_id) REFERENCES enderecos(id);

@@ -11,7 +11,7 @@ public interface CampeonatoJogadoresRepository extends JpaRepository<CampeonatoJ
 
 	List<CampeonatoJogador> findAllByCampeonatoTime(CampeonatoTime campeonatoTime);
 
-	Boolean existsByJogadorIdAndCampeonatoTimeId(Long jogadorId, Long campeonatoTimeId);
+	Boolean existsByAtletaIdAndCampeonatoTimeId(Long jogadorId, Long campeonatoTimeId);
 
 	void deleteByCampeonatoTimeId(Long id);
 

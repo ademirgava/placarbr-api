@@ -6,8 +6,8 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.br.placarbr_api.domain.dto.JogadorAtualizaDTO;
-import com.br.placarbr_api.domain.dto.JogadorCadastroDTO;
+import com.br.placarbr_api.domain.dto.AtletaAtualizaDTO;
+import com.br.placarbr_api.domain.dto.AtletaCadastroDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,21 +19,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "Jogador")
-@Table(name = "jogadores")
+@Entity(name = "Atleta")
+@Table(name = "atletas")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Jogador {
+public class Atleta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +43,8 @@ public class Jogador {
 	private String apelido;
 
 	private String descricao;
+	
+	private String email;
 
 	private byte[] foto;
 
@@ -63,15 +64,16 @@ public class Jogador {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Endereco endereco;
 
-	@OneToMany(mappedBy = "jogador")
+	@OneToMany(mappedBy = "atleta")
 	private List<CampeonatoJogador> campeonatoJogadores = new ArrayList<>();
 
-	public Jogador(JogadorCadastroDTO dto, Endereco endereco) {
+	public Atleta(AtletaCadastroDTO dto, Endereco endereco) {
 		this.nome = dto.nome();
 		this.apelido = dto.apelido();
 		this.descricao = dto.descricao();
 		this.cpf = dto.cpf();
 		this.rg = dto.rg();
+		this.email = dto.email();
 		this.pePredominante = dto.pePredominante();
 		this.dataNascimento = dto.dataNascimento();
 		this.celular = dto.celular();
@@ -80,7 +82,7 @@ public class Jogador {
 		this.dataCriacao = LocalDateTime.now(ZoneOffset.of("-03:00"));
 	}
 
-	public void atualizar(@Valid JogadorAtualizaDTO dto) {
+	public void atualizar(AtletaAtualizaDTO dto) {
 		this.nome = dto.nome();
 		this.apelido = dto.apelido();
 		this.descricao = dto.descricao();
@@ -88,6 +90,7 @@ public class Jogador {
 		this.rg = dto.rg();
 		this.pePredominante = dto.pePredominante();
 		this.dataNascimento = dto.dataNascimento();
+		this.email = dto.email();
 		this.celular = dto.celular();
 		this.endereco.atualizar(dto.endereco());
 	}

@@ -1,8 +1,9 @@
-CREATE TABLE jogadores (
+CREATE TABLE atletas (
 	id BIGINT AUTO_INCREMENT NOT NULL UNIQUE,
 	cpf varchar(14) NOT NULL,
 	rg varchar(12),
 	nome varchar(130) NOT NULL,
+	email varchar(140) NOT NULL,
 	apelido varchar(30),
 	data_nascimento date NOT NULL,
 	foto blob,

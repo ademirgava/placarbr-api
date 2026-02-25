@@ -1,6 +1,6 @@
 CREATE TABLE campeonato_jogadores (
 	id BIGINT AUTO_INCREMENT NOT NULL UNIQUE,
-	jogador_id BIGINT NOT NULL,
+	atleta_id BIGINT NOT NULL,
 	posicao varchar(3) NOT NULL,
 	campeonato_time_id BIGINT NOT NULL,
 	PRIMARY KEY (id)
