@@ -38,11 +38,11 @@ public class CampeonatoJogoService {
 			throw new ValidacaoException("Este jogo já esta cadastrado!");			
 		}
 		
-		if (repository.existsByTimeMandanteIdOrTimeVisitanteIdAndRodada(dto.cameponatoTimeMandateId(), dto.cameponatoTimeMandateId(), dto.rodada())) {
+		if (repository.temRodadaAndTimeMandanteIdOrTimeVisitanteId(dto.cameponatoTimeMandateId(), dto.cameponatoTimeMandateId(), dto.rodada()) > 0) {
 			throw new ValidacaoException("Este time id: "+dto.cameponatoTimeMandateId()+" já tem jogo para rodada: "+dto.rodada());			
 		}
 		
-		if (repository.existsByTimeMandanteIdOrTimeVisitanteIdAndRodada(dto.cameponatoTimeVisitanteId(), dto.cameponatoTimeVisitanteId(), dto.rodada())) {
+		if (repository.temRodadaAndTimeMandanteIdOrTimeVisitanteId(dto.cameponatoTimeVisitanteId(), dto.cameponatoTimeVisitanteId(), dto.rodada()) > 0) {
 			throw new ValidacaoException("Este time id: "+dto.cameponatoTimeVisitanteId()+" já tem jogo para rodada: "+dto.rodada());			
 		}
 		

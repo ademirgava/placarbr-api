@@ -25,15 +25,15 @@ public class CampeonatoJogadoresService {
 	private CampeonatoTimesService campeonatoTimesService;
 	
 	@Autowired
-	private JogadorService jogadorService;
+	private AtletaService atletaService;
 	
 	public CampeonatoTimeDetalhamentoDTO cadastrarCampeonatoJogador(CampeonatoJogadorCadastroDTO dto) {
-		if (repository.existsByJogadorIdAndCampeonatoTimeId(dto.jogadorId(), dto.campeonatoTimeId())) {
+		if (repository.existsByAtletaIdAndCampeonatoTimeId(dto.jogadorId(), dto.campeonatoTimeId())) {
 			throw new ValidacaoException("Jogador já cadastrado para este time!");
 		};
 		
 		CampeonatoJogador campeonatoJogador = new CampeonatoJogador(dto);
-		campeonatoJogador.setJogador(jogadorService.buscarJogadorReference(dto.jogadorId()));
+		campeonatoJogador.setAtleta(atletaService.buscarAtletaReference(dto.jogadorId()));
 		campeonatoJogador.setCampeonatoTime(campeonatoTimesService.buscarCampeonatoTimePorId(dto.campeonatoTimeId()));
 		repository.save(campeonatoJogador);
 		return new CampeonatoTimeDetalhamentoDTO(campeonatoJogador.getCampeonatoTime());

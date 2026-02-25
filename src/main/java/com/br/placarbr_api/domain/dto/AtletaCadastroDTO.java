@@ -4,14 +4,18 @@ import java.time.LocalDate;
 
 import com.br.placarbr_api.domain.model.TipoPePredominante;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-public record JogadorCadastroDTO(
+public record AtletaCadastroDTO(
 		@NotBlank(message = "Nome obrigatório!")
 		String nome, 
 		String apelido, 
 		String descricao, 
+		@NotBlank(message = "E-mail obrigatório!")
+		@Email
+		String email, 
 		@NotBlank
 		@Pattern(regexp = "^\\d{3}.\\d{3}.\\d{3}-\\d{2}$")
 		String cpf, 

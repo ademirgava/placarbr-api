@@ -37,7 +37,7 @@ public class Endereco {
 	private String complemento;
 	
 	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-	private Jogador jogador;
+	private Atleta jogador;
 	
 	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
 	private Equipe equipe;
