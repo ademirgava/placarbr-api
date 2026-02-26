@@ -42,6 +42,9 @@ public class Endereco {
 	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
 	private Equipe equipe;
 	
+	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
+	private ComissaoTecnica comissaoTecnica;
+	
 	public Endereco(EnderecoCadastroDTO dto) {
 		this.logradouro = dto.logradouro();
 		this.numero = dto.numero();
