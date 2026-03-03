@@ -57,7 +57,7 @@ public class Equipe {
 	private Endereco endereco;
 	
     @OneToMany(mappedBy = "equipe")
-    private List<CampeonatoTime> times = new ArrayList<>();
+    private List<Equipe> equipes = new ArrayList<Equipe>();
 
 	public Equipe(EquipeCadastroDTO dados, Endereco endereco) {
 		this.ativo = true;

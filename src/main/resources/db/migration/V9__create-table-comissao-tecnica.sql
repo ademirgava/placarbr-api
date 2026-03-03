@@ -8,7 +8,7 @@ CREATE TABLE comissao_tecnica (
 	email varchar(140) NOT NULL,
 	apelido varchar(30),
 	data_nascimento date NOT NULL,
-	foto blob,
+	foto LONGBLOB,
 	descricao varchar(255),
 	celular varchar(14) not null,
 	endereco_id BIGINT,

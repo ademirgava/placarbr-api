@@ -10,7 +10,7 @@ import com.br.placarbr_api.domain.dto.CampeonatoJogoDetalhamentoDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.domain.model.CampeonatoFase;
 import com.br.placarbr_api.domain.model.CampeonatoJogo;
-import com.br.placarbr_api.domain.model.CampeonatoTime;
+import com.br.placarbr_api.domain.model.Equipe;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.CameponatoJogoRepository;
 
@@ -24,10 +24,10 @@ public class CampeonatoJogoService {
 	private CampeonatoFaseService faseService;
 	
 	@Autowired
-	private CampeonatoTimesService timesService;
+	private CampeonatoService campeonatoService;
 	
 	@Autowired
-	private CampeonatoService campeonatoService;
+	private EquipeService equipeService;
 	
 	public CampeonatoJogoDetalhamentoDTO cadastrarCameponatoJogo(CampeonatoJogoCadastroDTO dto) {
 		if (dto.cameponatoTimeMandateId() == dto.cameponatoTimeVisitanteId()) {
@@ -48,11 +48,10 @@ public class CampeonatoJogoService {
 		
 		Campeonato campeonato = campeonatoService.buscarCampeonatoPorId(dto.campeonatoId());
 		CampeonatoFase fase = faseService.buscarCampeonatoFasePorId(dto.campeonatoFaseId());
+		Equipe equipeVisitante = equipeService.buscarEquipePeloIdReference(dto.cameponatoTimeVisitanteId());
+		Equipe equipeMandante = equipeService.buscarEquipePeloIdReference(dto.cameponatoTimeMandateId());
 		
-		CampeonatoTime timeVisitante = timesService.buscarCampeonatoTimePorIdAndCampeonatoId(dto.cameponatoTimeVisitanteId(), dto.campeonatoId());
-		CampeonatoTime timeMandante = timesService.buscarCampeonatoTimePorIdAndCampeonatoId(dto.cameponatoTimeMandateId(), dto.campeonatoId());
-		
-		return new CampeonatoJogoDetalhamentoDTO(repository.save(new CampeonatoJogo(dto.rodada(), timeVisitante, timeMandante, fase, campeonato)));
+		return new CampeonatoJogoDetalhamentoDTO(repository.save(new CampeonatoJogo(dto.rodada(), equipeVisitante, equipeMandante, fase, campeonato)));
 	}
 
 	public Page<CampeonatoJogoDetalhamentoDTO> listarCampeonatoJogosPorCampeonatoId(Pageable paginacao, Long campeonatoID) {

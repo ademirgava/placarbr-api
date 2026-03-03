@@ -38,9 +38,6 @@ public class Campeonato {
 	private LocalDateTime dataCriacao;
 
 	@OneToMany(mappedBy = "campeonato")
-	private List<CampeonatoTime> times = new ArrayList<>();
-
-	@OneToMany(mappedBy = "campeonato")
 	private List<CampeonatoFase> fases = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "campeonato")
