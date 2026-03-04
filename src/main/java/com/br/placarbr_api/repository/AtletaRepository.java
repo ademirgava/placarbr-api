@@ -1,5 +1,7 @@
 package com.br.placarbr_api.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.br.placarbr_api.domain.model.Atleta;
@@ -7,5 +9,7 @@ import com.br.placarbr_api.domain.model.Atleta;
 public interface AtletaRepository extends JpaRepository<Atleta, Long>{
 
 	boolean existsByCpf(String cpf);
+
+	Page<Atleta> findAllByEquipeId(Pageable paginacao, Long equipeId);
 
 }

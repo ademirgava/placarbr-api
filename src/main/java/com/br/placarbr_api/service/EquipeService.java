@@ -14,6 +14,8 @@ import com.br.placarbr_api.domain.dto.EquipeDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.EquipeListagemDTO;
 import com.br.placarbr_api.domain.model.Endereco;
 import com.br.placarbr_api.domain.model.Equipe;
+import com.br.placarbr_api.infra.exception.NotFoundExecption;
+import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.EquipeRepository;
 
 import jakarta.validation.Valid;
@@ -28,6 +30,9 @@ public class EquipeService {
 	private EnderecoService enderecoService;
 
 	public EquipeDetalhamentoDTO cadastrar(EquipeCadastroDTO dto, MultipartFile logomarca) throws IOException {
+		if (logomarca == null) {
+			throw new ValidacaoException("Escudo da equipe é obrigatório");
+		}
 		Endereco endereco = enderecoService.cadastrar(dto.endereco());
 		Equipe novaEquipe = new Equipe(dto, endereco);
 		novaEquipe.setLogomarca(logomarca.getBytes());
@@ -44,7 +49,7 @@ public class EquipeService {
 	}
 	
 	public Equipe buscarEquipePeloIdReference(Long id) {
-		return repository.getReferenceById(id);
+		return repository.findById(id).orElseThrow(() -> new NotFoundExecption("Equipe com id: "+id+" não encontrada!"));
 	}
 
 	public EquipeDetalhamentoDTO atualizarEquipe(@Valid EquipeAtualizaDTO dto) {

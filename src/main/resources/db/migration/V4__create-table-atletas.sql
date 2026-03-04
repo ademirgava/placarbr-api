@@ -12,7 +12,7 @@ CREATE TABLE atletas (
 	celular varchar(14) not null,
 	endereco_id BIGINT,
 	data_criacao DATETIME NOT NULL,
-	equipe_id BIGINT ,
+	equipe_id BIGINT,
 	PRIMARY KEY (id)
 );
 

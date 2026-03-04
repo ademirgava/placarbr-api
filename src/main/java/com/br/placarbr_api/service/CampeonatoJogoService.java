@@ -34,15 +34,15 @@ public class CampeonatoJogoService {
 			throw new ValidacaoException("Não é possível solicitar jogo com time mandante e visitante sendo o mesmo!");
 		}
 		
-		if (repository.existsByTimeMandanteIdAndTimeVisitanteId(dto.cameponatoTimeMandateId(), dto.cameponatoTimeVisitanteId())) {
+		if (repository.existsByEquipeMandanteIdAndEquipeVisitanteId(dto.cameponatoTimeMandateId(), dto.cameponatoTimeVisitanteId())) {
 			throw new ValidacaoException("Este jogo já esta cadastrado!");			
 		}
 		
-		if (repository.temRodadaAndTimeMandanteIdOrTimeVisitanteId(dto.cameponatoTimeMandateId(), dto.cameponatoTimeMandateId(), dto.rodada()) > 0) {
+		if (repository.temRodadaAndEquipeMandanteIdOrEquipeVisitanteId(dto.cameponatoTimeMandateId(), dto.cameponatoTimeMandateId(), dto.rodada()) > 0) {
 			throw new ValidacaoException("Este time id: "+dto.cameponatoTimeMandateId()+" já tem jogo para rodada: "+dto.rodada());			
 		}
 		
-		if (repository.temRodadaAndTimeMandanteIdOrTimeVisitanteId(dto.cameponatoTimeVisitanteId(), dto.cameponatoTimeVisitanteId(), dto.rodada()) > 0) {
+		if (repository.temRodadaAndEquipeMandanteIdOrEquipeVisitanteId(dto.cameponatoTimeVisitanteId(), dto.cameponatoTimeVisitanteId(), dto.rodada()) > 0) {
 			throw new ValidacaoException("Este time id: "+dto.cameponatoTimeVisitanteId()+" já tem jogo para rodada: "+dto.rodada());			
 		}
 		

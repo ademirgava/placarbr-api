@@ -36,31 +36,31 @@ public class Atleta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nome;
-
-	private String apelido;
-
-	private String descricao;
-	
-	private String email;
-
-	private byte[] foto;
-
 	private String cpf;
 
 	private String rg;
 
-	@Enumerated(EnumType.STRING)
-	private TipoPePredominante pePredominante;
+	private String nome;
+
+	private String email;
+
+	private String apelido;
 
 	private LocalDate dataNascimento;
 
-	private String celular;
+	private byte[] foto;
 
-	private LocalDateTime dataCriacao;
+	@Enumerated(EnumType.STRING)
+	private TipoPePredominante pePredominante;
+	
+	private String descricao;
+
+	private String celular;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Endereco endereco;
+
+	private LocalDateTime dataCriacao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Equipe equipe;

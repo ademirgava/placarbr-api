@@ -24,6 +24,7 @@ public record AtletaCadastroDTO(
 		LocalDate dataNascimento,
 		@Pattern(regexp = "^\\(\\d{2}\\)9?\\d{4}-\\d{4}$")
 		String celular,
-		EnderecoCadastroDTO endereco) {
+		EnderecoCadastroDTO endereco,
+		Long equipeId) {
 
 }

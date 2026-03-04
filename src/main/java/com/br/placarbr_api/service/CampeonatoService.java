@@ -10,6 +10,7 @@ import com.br.placarbr_api.domain.dto.CampeonatoDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoListagemDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
+import com.br.placarbr_api.repository.CampeonatoRepository;
 
 @Service
 public class CampeonatoService {
