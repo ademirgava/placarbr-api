@@ -1,4 +1,4 @@
-package com.br.placarbr_api.service;
+package com.br.placarbr_api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

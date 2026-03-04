@@ -3,8 +3,6 @@ package com.br.placarbr_api.domain.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.br.placarbr_api.domain.dto.AtletaAtualizaDTO;
 import com.br.placarbr_api.domain.dto.AtletaCadastroDTO;
@@ -16,7 +14,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,34 +36,34 @@ public class Atleta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nome;
-
-	private String apelido;
-
-	private String descricao;
-	
-	private String email;
-
-	private byte[] foto;
-
 	private String cpf;
 
 	private String rg;
 
-	@Enumerated(EnumType.STRING)
-	private TipoPePredominante pePredominante;
+	private String nome;
+
+	private String email;
+
+	private String apelido;
 
 	private LocalDate dataNascimento;
 
-	private String celular;
+	private byte[] foto;
 
-	private LocalDateTime dataCriacao;
+	@Enumerated(EnumType.STRING)
+	private TipoPePredominante pePredominante;
+	
+	private String descricao;
+
+	private String celular;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Endereco endereco;
 
-	@OneToMany(mappedBy = "atleta")
-	private List<CampeonatoJogador> campeonatoJogadores = new ArrayList<>();
+	private LocalDateTime dataCriacao;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Equipe equipe;
 
 	public Atleta(AtletaCadastroDTO dto, Endereco endereco) {
 		this.nome = dto.nome();

@@ -34,7 +34,7 @@ public class AtletaController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity criarJogador(@RequestBody @Valid AtletaCadastroDTO dto, UriComponentsBuilder builder) {
+	public ResponseEntity criarAtleta(@RequestBody @Valid AtletaCadastroDTO dto, UriComponentsBuilder builder) {
 		try {
 			AtletaDetalhamentoDTO jogador = atletaService.cadastrar(dto);
 			var uri = builder.path("/jogadores/{id}").buildAndExpand(jogador.id()).toUri();
@@ -46,13 +46,18 @@ public class AtletaController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<AtletaListagemDTO>> listarJogadores(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao) {
+	public ResponseEntity<Page<AtletaListagemDTO>> listarAtleta(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao) {
 		return ResponseEntity.ok(atletaService.listarAtletas(paginacao));
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<AtletaDetalhamentoDTO> detalhamentoJogador(@PathVariable Long id) {
+	public ResponseEntity<AtletaDetalhamentoDTO> detalhamentoJogadorAtleta(@PathVariable Long id) {
 		return ResponseEntity.ok(atletaService.buscarAtleta(id));
+	}
+	
+	@GetMapping("/equipe/{id}")
+	public ResponseEntity<Page<AtletaListagemDTO>> listarAtletasPorEquipeId(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao, @PathVariable Long id) {
+		return ResponseEntity.ok(atletaService.listarAtletasPorEquipeId(paginacao, id));
 	}
 	
 	@PutExchange

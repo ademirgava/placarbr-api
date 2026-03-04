@@ -4,5 +4,6 @@ CREATE TABLE campeonatos (
 	descricao varchar(255) NOT NULL,
 	data_inicio date,
 	data_criacao datetime NOT NULL,
+    iniciado BOOLEAN NOT NULL DEFAULT '1',
 	PRIMARY KEY (id)
 );

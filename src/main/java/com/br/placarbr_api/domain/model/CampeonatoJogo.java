@@ -31,23 +31,23 @@ public class CampeonatoJogo {
 	private Campeonato campeonato;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "time_mandante_id")
-	private CampeonatoTime timeMandante;
+	@JoinColumn(name = "equipe_mandante_id")
+	private Equipe equipeMandante;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "time_visitante_id")
-	private CampeonatoTime timeVisitante;
+	@JoinColumn(name = "equipe_visitante_id")
+	private Equipe equipeVisitante;
 
 	private Integer rodada;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private CampeonatoFase campeonatoFase;
 
-	public CampeonatoJogo(Integer rodada, CampeonatoTime timeVisitante, CampeonatoTime timeMandante,
+	public CampeonatoJogo(Integer rodada, Equipe timeVisitante, Equipe timeMandante,
 			CampeonatoFase fase, Campeonato campeonato) {
 		this.rodada = rodada;
-		this.timeVisitante = timeVisitante;
-		this.timeMandante = timeMandante;
+		this.equipeVisitante = timeVisitante;
+		this.equipeMandante = timeMandante;
 		this.campeonatoFase = fase;
 		this.campeonato = campeonato;
 	}

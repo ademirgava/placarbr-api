@@ -39,7 +39,7 @@ public class EquipeController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<EquipeDetalhamentoDTO> cadastrarEquipe(@RequestPart @Valid EquipeCadastroDTO dto, @RequestParam MultipartFile logomarca, UriComponentsBuilder builder) {
+	public ResponseEntity<EquipeDetalhamentoDTO> cadastrarEquipe(@RequestPart @Valid EquipeCadastroDTO dto, @RequestParam(required = false) MultipartFile logomarca, UriComponentsBuilder builder) {
 		try {
 			EquipeDetalhamentoDTO equipe = equipeService.cadastrar(dto, logomarca);
 			var uri = builder.path("/equipes/{id}").buildAndExpand(equipe.id()).toUri();

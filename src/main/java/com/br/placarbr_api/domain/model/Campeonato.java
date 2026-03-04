@@ -36,9 +36,7 @@ public class Campeonato {
 	private String descricao;
 	private LocalDate dataInicio;
 	private LocalDateTime dataCriacao;
-
-	@OneToMany(mappedBy = "campeonato")
-	private List<CampeonatoTime> times = new ArrayList<>();
+	private Boolean iniciado;
 
 	@OneToMany(mappedBy = "campeonato")
 	private List<CampeonatoFase> fases = new ArrayList<>();
@@ -52,6 +50,7 @@ public class Campeonato {
 		this.dataInicio = dto.dataInicio();
 
 		this.dataCriacao = LocalDateTime.now();
+		this.iniciado = false;
 	}
 
 }

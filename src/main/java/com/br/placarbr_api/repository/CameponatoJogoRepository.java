@@ -9,10 +9,10 @@ import com.br.placarbr_api.domain.model.CampeonatoJogo;
 
 public interface CameponatoJogoRepository extends JpaRepository<CampeonatoJogo, Long> {
 
-	boolean existsByTimeMandanteIdAndTimeVisitanteId(Long cameponatoTimeMandateId, Long cameponatoTimeVisitanteId);
+	boolean existsByEquipeMandanteIdAndEquipeVisitanteId(Long cameponatoEquipeMandateId, Long cameponatoEquipeVisitanteId);
 
-    @Query(value = "select CASE WHEN count(*) > 0 THEN true ELSE false END  from campeonato_jogos j where j.rodada=:rodada and (j.time_mandante_id=:mandateId or j.time_visitante_id=:visitanteId)", nativeQuery = true)
-	int temRodadaAndTimeMandanteIdOrTimeVisitanteId(Long mandateId, Long visitanteId, Integer rodada);
+    @Query(value = "select CASE WHEN count(*) > 0 THEN true ELSE false END  from campeonato_jogos j where j.rodada=:rodada and (j.equipe_mandante_id=:mandateId or j.equipe_visitante_id=:visitanteId)", nativeQuery = true)
+	int temRodadaAndEquipeMandanteIdOrEquipeVisitanteId(Long mandateId, Long visitanteId, Integer rodada);
 
 	Page<CampeonatoJogo> findByCampeonatoId(Long campeonatoId, Pageable paginacao);
 

@@ -9,6 +9,3 @@ CREATE TABLE enderecos (
 	complemento varchar(120),
 	PRIMARY KEY (id)
 );
-
-
-ALTER TABLE atletas ADD CONSTRAINT atletas_fk7 FOREIGN KEY (endereco_id) REFERENCES enderecos(id);
