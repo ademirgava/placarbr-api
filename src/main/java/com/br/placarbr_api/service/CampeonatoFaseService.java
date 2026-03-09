@@ -70,4 +70,8 @@ public class CampeonatoFaseService {
 	public CampeonatoFase buscarCampeonatoFasePorId(Long id) {
 		return repository.findById(id).orElseThrow(() -> new NotFoundExecption("Fase com id: "+id+" não encontrado!"));
 	}
+
+	public CampeonatoFase buscarCampeonatoFasePorIdECampeonatoId(Long campeonatoFaseId, Long campeonatoId) {
+		return repository.findByIdAndCampeonatoId(campeonatoFaseId, campeonatoId).orElseThrow(() -> new NotFoundExecption("Fase com id: "+campeonatoFaseId+" para campeonato com id: "+campeonatoId+" não encontrado!"));
+	}
 }
