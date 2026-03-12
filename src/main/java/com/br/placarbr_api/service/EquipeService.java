@@ -11,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.br.placarbr_api.domain.dto.EquipeAtualizaDTO;
 import com.br.placarbr_api.domain.dto.EquipeCadastroDTO;
 import com.br.placarbr_api.domain.dto.EquipeDetalhamentoDTO;
-import com.br.placarbr_api.domain.dto.EquipeListagemDTO;
 import com.br.placarbr_api.domain.model.Endereco;
 import com.br.placarbr_api.domain.model.Equipe;
 import com.br.placarbr_api.infra.exception.NotFoundExecption;
-import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.EquipeRepository;
 
 import jakarta.validation.Valid;
@@ -29,19 +27,15 @@ public class EquipeService {
 	@Autowired
 	private EnderecoService enderecoService;
 
-	public EquipeDetalhamentoDTO cadastrar(EquipeCadastroDTO dto, MultipartFile logomarca) throws IOException {
-		if (logomarca == null) {
-			throw new ValidacaoException("Escudo da equipe é obrigatório");
-		}
+	public EquipeDetalhamentoDTO cadastrar(EquipeCadastroDTO dto) {
 		Endereco endereco = enderecoService.cadastrar(dto.endereco());
 		Equipe novaEquipe = new Equipe(dto, endereco);
-		novaEquipe.setLogomarca(logomarca.getBytes());
 		Equipe equipe = repository.save(novaEquipe);
 		return new EquipeDetalhamentoDTO(equipe);
 	}
 
-	public Page<EquipeListagemDTO> listarEquipes(Pageable paginacao) {
-		return repository.findAll(paginacao).map(EquipeListagemDTO::new);
+	public Page<EquipeDetalhamentoDTO> listarEquipes(Pageable paginacao) {
+		return repository.findAll(paginacao).map(EquipeDetalhamentoDTO::new);
 	}
 
 	public EquipeDetalhamentoDTO buscarEquipe(Long id) {
@@ -68,4 +62,11 @@ public class EquipeService {
 		equipe.ativarEquipe();
 		return new EquipeDetalhamentoDTO(equipe);
 	}
+
+	public EquipeDetalhamentoDTO addLogomarca(Long id, MultipartFile logomarca) throws IOException {
+		Equipe equipe = buscarEquipePeloIdReference(id);
+		equipe.setLogomarca(logomarca.getBytes());
+		return new EquipeDetalhamentoDTO(repository.save(equipe));
+	}
+	
 }

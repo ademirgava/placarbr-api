@@ -23,7 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.br.placarbr_api.domain.dto.EquipeAtualizaDTO;
 import com.br.placarbr_api.domain.dto.EquipeCadastroDTO;
 import com.br.placarbr_api.domain.dto.EquipeDetalhamentoDTO;
-import com.br.placarbr_api.domain.dto.EquipeListagemDTO;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.service.EquipeService;
 
@@ -39,20 +38,18 @@ public class EquipeController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<EquipeDetalhamentoDTO> cadastrarEquipe(@RequestPart @Valid EquipeCadastroDTO dto, @RequestParam(required = false) MultipartFile logomarca, UriComponentsBuilder builder) {
+	public ResponseEntity<EquipeDetalhamentoDTO> cadastrarEquipe(@RequestBody @Valid EquipeCadastroDTO dto, UriComponentsBuilder builder) {
 		try {
-			EquipeDetalhamentoDTO equipe = equipeService.cadastrar(dto, logomarca);
+			EquipeDetalhamentoDTO equipe = equipeService.cadastrar(dto);
 			var uri = builder.path("/equipes/{id}").buildAndExpand(equipe.id()).toUri();
 			return ResponseEntity.created(uri).body(equipe);
 		} catch (ValidacaoException e) {
-			throw new ValidacaoException(e.getMessage());
-		} catch (IOException e) {
 			throw new ValidacaoException(e.getMessage());
 		}
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<EquipeListagemDTO>> listarEquipes(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+	public ResponseEntity<Page<EquipeDetalhamentoDTO>> listarEquipes(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
 		return ResponseEntity.ok(equipeService.listarEquipes(paginacao));
 	}
 	
@@ -79,4 +76,12 @@ public class EquipeController {
 	public ResponseEntity<EquipeDetalhamentoDTO> reativarEquipe(@PathVariable Long id) {
 		return ResponseEntity.ok(equipeService.reativarEquipe(id));
 	}
+	
+	@PostMapping("/add-imagem/{id}")
+	@Transactional
+	public ResponseEntity<EquipeDetalhamentoDTO> addLogomarca(@PathVariable Long id,
+			@RequestParam("file") MultipartFile logomarca) throws IOException, IOException {
+		return ResponseEntity.ok(equipeService.addLogomarca(id, logomarca));
+	}
+	
 }

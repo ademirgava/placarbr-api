@@ -18,6 +18,7 @@ public record EquipeCadastroDTO(
 		String corPrincipal,
 		@NotBlank
 		String corSecundaria,
+		@NotNull
 		EnderecoCadastroDTO endereco
 		) {
 
