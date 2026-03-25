@@ -22,7 +22,7 @@ public record AtletaCadastroDTO(
 		String rg,
 		TipoPePredominante pePredominante,
 		LocalDate dataNascimento,
-		@Pattern(regexp = "^\\(\\d{2}\\)9?\\d{4}-\\d{4}$")
+		@Pattern(regexp = "^\\(\\d{2}\\)9?\\d{5}-\\d{4}$")
 		String celular,
 		EnderecoCadastroDTO endereco,
 		Long equipeId) {

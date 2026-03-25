@@ -26,7 +26,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/atleta")
+@RequestMapping("/atletas")
 public class AtletaController {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class AtletaController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<AtletaListagemDTO>> listarAtleta(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao) {
+	public ResponseEntity<Page<AtletaDetalhamentoDTO>> listarAtleta(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao) {
 		return ResponseEntity.ok(atletaService.listarAtletas(paginacao));
 	}
 	

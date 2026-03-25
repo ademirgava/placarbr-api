@@ -36,8 +36,10 @@ public class AtletaService {
 		Endereco endereco = enderecoService.cadastrar(dto.endereco());
 		
 		Atleta atleta = new Atleta(dto, endereco);
-		Equipe equipe = equipeService.buscarEquipePeloIdReference(dto.equipeId());
-		atleta.setEquipe(equipe);
+		if (dto.equipeId() != null) {
+			Equipe equipe = equipeService.buscarEquipePeloIdReference(dto.equipeId());
+			atleta.setEquipe(equipe);
+		}
 		return new AtletaDetalhamentoDTO(repository.save(atleta));
 	}
 
@@ -46,8 +48,8 @@ public class AtletaService {
 		return new AtletaDetalhamentoDTO(jogador);
 	}
 
-	public Page<AtletaListagemDTO> listarAtletas(Pageable paginacao) {
-		return repository.findAll(paginacao).map(AtletaListagemDTO::new);
+	public Page<AtletaDetalhamentoDTO> listarAtletas(Pageable paginacao) {
+		return repository.findAll(paginacao).map(AtletaDetalhamentoDTO::new);
 	}
 
 	public AtletaDetalhamentoDTO atualizarAtleta(AtletaAtualizaDTO dto) {
