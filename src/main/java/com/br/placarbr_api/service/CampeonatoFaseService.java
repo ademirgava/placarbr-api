@@ -2,13 +2,16 @@ package com.br.placarbr_api.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.br.placarbr_api.domain.dto.CampeonatoFaseAtualizaDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseCadastroDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseListagemDTO;
+import com.br.placarbr_api.domain.dto.CampeonatoFaseProximaOrdemFaseDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseReordenarDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.domain.model.CampeonatoFase;
@@ -27,13 +30,14 @@ public class CampeonatoFaseService {
 	private CampeonatoService campeonatoService;
 
 	public List<CampeonatoFaseListagemDTO> buscarFasesPorCampeonatoId(Long id) {
-		return repository.findByCampeonatoId(id).stream().map(CampeonatoFaseListagemDTO::new).toList();
+		Sort sort = Sort.by("ordemFase").ascending();
+		return repository.findByCampeonatoIdOrderByOrdemFaseAsc(id).stream().map(CampeonatoFaseListagemDTO::new).toList();
 	}
 
 	public CampeonatoFaseListagemDTO cadastrarFase(CampeonatoFaseCadastroDTO dto) {
 		Campeonato campeonato = campeonatoService.buscarCampeonatoPorId(dto.campeonatoId());
 
-		if (dto.fase().equals(TipoFase.GRUPOS) && dto.quantidadeGrupos() == null) {
+		if (dto.tipoFase().equals(TipoFase.GRUPOS) && dto.quantidadeGrupos() == null) {
 			throw new ValidacaoException("Quantidade de grupos não pode ser nulo quando o tipo da fase é GRUPOS");
 		}
 
@@ -73,5 +77,14 @@ public class CampeonatoFaseService {
 
 	public CampeonatoFase buscarCampeonatoFasePorIdECampeonatoId(Long campeonatoFaseId, Long campeonatoId) {
 		return repository.findByIdAndCampeonatoId(campeonatoFaseId, campeonatoId).orElseThrow(() -> new NotFoundExecption("Fase com id: "+campeonatoFaseId+" para campeonato com id: "+campeonatoId+" não encontrado!"));
+	}
+
+	public CampeonatoFaseProximaOrdemFaseDTO buscarProximaFaseOrdemPorCampeonatoId(Long id) {
+		Long proximaOrdem = 1l;
+		Optional<Long> ultimaOrdemFase = repository.findTopOrdemFaseByCampeonatoId(id);
+		if (ultimaOrdemFase.isPresent() && ultimaOrdemFase.get() > 0) {
+			proximaOrdem = ultimaOrdemFase.get() +1;
+		}
+		return new CampeonatoFaseProximaOrdemFaseDTO(proximaOrdem);
 	}
 }

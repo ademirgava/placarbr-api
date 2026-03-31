@@ -14,7 +14,7 @@ public record CampeonatoFaseCadastroDTO(
 		String nome,
 		String descricao,
 		@NotNull
-		TipoFase fase,
+		TipoFase tipoFase,
 		@NotNull
 		Integer ordemFase,
 		Integer classificados,

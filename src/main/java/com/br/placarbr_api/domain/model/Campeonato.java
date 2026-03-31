@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.br.placarbr_api.domain.dto.CampeonatoAtualizaDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoCadastroDTO;
 
 import jakarta.persistence.Entity;
@@ -40,7 +41,7 @@ public class Campeonato {
 
 	@OneToMany(mappedBy = "campeonato")
 	private List<CampeonatoFase> fases = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "campeonato")
 	private List<CampeonatoJogo> jogos = new ArrayList<>();
 
@@ -50,7 +51,17 @@ public class Campeonato {
 		this.dataInicio = dto.dataInicio();
 
 		this.dataCriacao = LocalDateTime.now();
-		this.iniciado = false;
+		this.iniciado = dto.iniciado();
+	}
+
+	public void atualizar(CampeonatoAtualizaDTO dto) {
+		this.nome = dto.nome();
+		this.descricao = dto.descricao();
+		this.iniciado = dto.iniciado();
+
+		if (dto.dataInicio() != null) {
+			this.dataInicio = dto.dataInicio();
+		}
 	}
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseAtualizaDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseCadastroDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseListagemDTO;
+import com.br.placarbr_api.domain.dto.CampeonatoFaseProximaOrdemFaseDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoFaseReordenarDTO;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.service.CampeonatoFaseService;
@@ -73,5 +74,11 @@ public class CampeonatoFaseController {
 		service.deletarFase(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/campeonato/{id}/proxima-ordem")
+	public ResponseEntity<CampeonatoFaseProximaOrdemFaseDTO> buscarProximaFaseOrdemPorCampeonatoId(@PathVariable Long id) {
+		return ResponseEntity.ok(service.buscarProximaFaseOrdemPorCampeonatoId(id));
+	}
+
 
 }

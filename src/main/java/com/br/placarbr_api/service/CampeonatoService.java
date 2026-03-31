@@ -5,12 +5,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.br.placarbr_api.domain.dto.CampeonatoAtualizaDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoCadastroDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.CampeonatoListagemDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.CampeonatoRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class CampeonatoService {
@@ -32,6 +35,12 @@ public class CampeonatoService {
 
 	public CampeonatoDetalhamentoDTO cadastrarCampeonato(CampeonatoCadastroDTO dto) {
 		Campeonato campeonato = repository.save(new Campeonato(dto));
+		return new CampeonatoDetalhamentoDTO(campeonato);
+	}
+
+	public CampeonatoDetalhamentoDTO atualizaCampeonato(CampeonatoAtualizaDTO dto) {
+		Campeonato campeonato = buscarCampeonatoPorId(dto.id());
+		campeonato.atualizar(dto);
 		return new CampeonatoDetalhamentoDTO(campeonato);
 	}
 

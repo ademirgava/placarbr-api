@@ -59,7 +59,7 @@ public class CampeonatoFase {
 	public CampeonatoFase(CampeonatoFaseCadastroDTO dto, Campeonato campeonato) {
 		this.nome = dto.nome();
 		this.descricao = dto.descricao();
-		this.tipoFase = dto.fase();
+		this.tipoFase = dto.tipoFase();
 		this.ordemFase = dto.ordemFase();
 		this.idaVolta = dto.idaVolta();
 		this.quantidadeTimes = dto.quantidadeTimes();
