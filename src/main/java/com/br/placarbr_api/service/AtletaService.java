@@ -10,12 +10,15 @@ import com.br.placarbr_api.domain.dto.AtletaAtualizaDTO;
 import com.br.placarbr_api.domain.dto.AtletaCadastroDTO;
 import com.br.placarbr_api.domain.dto.AtletaDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.AtletaListagemDTO;
+import com.br.placarbr_api.domain.dto.AtletaVincularEquipeDTO;
 import com.br.placarbr_api.domain.model.Atleta;
 import com.br.placarbr_api.domain.model.Endereco;
 import com.br.placarbr_api.domain.model.Equipe;
 import com.br.placarbr_api.infra.exception.NotFoundExecption;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.repository.AtletaRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class AtletaService {
@@ -64,5 +67,22 @@ public class AtletaService {
 
 	public Page<AtletaListagemDTO> listarAtletasPorEquipeId(Pageable paginacao, Long equipeId) {
 		return repository.findAllByEquipeId(paginacao, equipeId).map(AtletaListagemDTO::new);
+	}
+
+	public Page<AtletaDetalhamentoDTO> listarAtletasPorNome(Pageable paginacao, String nome) {
+		return repository.findByNomeStartingWith(paginacao, nome).map(AtletaDetalhamentoDTO::new);
+	}
+
+	public AtletaDetalhamentoDTO vincularAtletaNaEquipe(AtletaVincularEquipeDTO dto) {
+		Atleta atleta = buscarAtletaReference(dto.atletaId());
+		Equipe equipe = equipeService.buscarEquipePeloIdReference(dto.equipeId());
+		atleta.vincularEquipe(equipe);
+		return new AtletaDetalhamentoDTO(atleta);
+	}
+
+	public AtletaDetalhamentoDTO desvincularAtletaNaEquipe(AtletaVincularEquipeDTO dto) {
+		Atleta atleta = buscarAtletaReference(dto.atletaId());
+		atleta.desvincularEquipe();
+		return new AtletaDetalhamentoDTO(atleta);
 	}
 }
