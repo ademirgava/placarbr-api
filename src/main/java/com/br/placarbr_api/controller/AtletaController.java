@@ -19,6 +19,7 @@ import com.br.placarbr_api.domain.dto.AtletaAtualizaDTO;
 import com.br.placarbr_api.domain.dto.AtletaCadastroDTO;
 import com.br.placarbr_api.domain.dto.AtletaDetalhamentoDTO;
 import com.br.placarbr_api.domain.dto.AtletaListagemDTO;
+import com.br.placarbr_api.domain.dto.AtletaVincularEquipeDTO;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
 import com.br.placarbr_api.service.AtletaService;
 
@@ -62,7 +63,24 @@ public class AtletaController {
 	
 	@PutExchange
 	@Transactional
-	public ResponseEntity<AtletaDetalhamentoDTO> atualizarJogadro(@RequestBody @Valid AtletaAtualizaDTO dto) {
+	public ResponseEntity<AtletaDetalhamentoDTO> atualizarAtleta(@RequestBody @Valid AtletaAtualizaDTO dto) {
 		return ResponseEntity.ok(atletaService.atualizarAtleta(dto));
+	}
+	
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<Page<AtletaDetalhamentoDTO>> listarAtletasPorNome(@PageableDefault(size =10, sort = {"nome"}) Pageable paginacao, @PathVariable String nome) {
+		return ResponseEntity.ok(atletaService.listarAtletasPorNome(paginacao, nome));
+	}
+	
+	@PutExchange("/vincular-equipe")
+	@Transactional
+	public ResponseEntity<AtletaDetalhamentoDTO> vincularAtletaNaEquipe(@RequestBody @Valid AtletaVincularEquipeDTO dto) {
+		return ResponseEntity.ok(atletaService.vincularAtletaNaEquipe(dto));
+	}
+	
+	@PutExchange("/desvincular-equipe")
+	@Transactional
+	public ResponseEntity<AtletaDetalhamentoDTO> desvincularAtletaNaEquipe(@RequestBody @Valid AtletaVincularEquipeDTO dto) {
+		return ResponseEntity.ok(atletaService.desvincularAtletaNaEquipe(dto));
 	}
 }

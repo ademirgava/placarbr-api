@@ -92,5 +92,13 @@ public class Atleta {
 		this.celular = dto.celular();
 		this.endereco.atualizar(dto.endereco());
 	}
+	
+	public void vincularEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
+	public void desvincularEquipe() {
+		this.equipe = null;
+	}
 
 }

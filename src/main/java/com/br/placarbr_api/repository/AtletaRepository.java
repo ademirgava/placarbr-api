@@ -11,5 +11,7 @@ public interface AtletaRepository extends JpaRepository<Atleta, Long>{
 	boolean existsByCpf(String cpf);
 
 	Page<Atleta> findAllByEquipeId(Pageable paginacao, Long equipeId);
+	
+	Page<Atleta> findByNomeStartingWith(Pageable paginacao, String nome);
 
 }
