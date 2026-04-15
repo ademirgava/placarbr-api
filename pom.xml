@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.br</groupId>
 	<artifactId>placarbr-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>placarbr-api</name>
 	<description>API - Tabelas para jogos de futebol</description>
 	<url/>
