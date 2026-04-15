@@ -22,6 +22,6 @@ jobs:
     - name: Login Docker Hub
       run: docker login -u ${{secrets.DOCKER_USER_NAME}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Builder docker image
-      run: docker build -t ademirgava/placarbr .
+      run: docker build -t ademirgava/placarbr-api .
     - name: Push image docker
-      run: docker push ademirgava/placarbr
+      run: docker push ademirgava/placarbr-api
