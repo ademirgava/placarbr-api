@@ -1,0 +1,13 @@
+name: Deploy App Placar BR - dev
+
+on:
+	push:
+		branches: [develop]
+		
+jobs:
+	build:
+		runs-on: ubuntu-lastest
+		steps:
+			- name: Checkout code
+			  uses: actions/checkout@v3
+			  
