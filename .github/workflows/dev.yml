@@ -2,7 +2,7 @@ name: Deploy App Placar BR - dev
 
 on:
     push:
-	    branches: [develop]
+		branches: [develop]
 
 jobs:
     build:
