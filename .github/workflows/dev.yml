@@ -1,8 +1,8 @@
 name: Deploy App Placar BR - dev
 
 on:
-	push:
-		branches: ["develop"]
+  push:
+    branches: [ "develop" ]
 
 jobs:
 	build:
