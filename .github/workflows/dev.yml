@@ -1,4 +1,4 @@
-name: Deploy Placar Br - Develop 0.0.1
+name: Deploy Placar Br - Develop  0.0.1
 
 on:
   push:
