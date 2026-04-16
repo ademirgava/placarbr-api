@@ -25,3 +25,12 @@ jobs:
       run: docker build -t ademirgava/placarbr-api .
     - name: Push image docker
       run: docker push ademirgava/placarbr-api
+
+  deploy:
+    needs: build
+    runs-on:self-hosted
+    steps:
+    - name: Pull image from docker hub
+      run: docker pull ademirgava/placarbr-api:latest
+    - name: Run docker conteinar
+	  run: docker run -d -p 8080:8080 --name deploy_placarbr_dev ademirgava/placarbr-api
