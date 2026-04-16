@@ -32,5 +32,7 @@ jobs:
     steps:
     - name: Pull image from docker hub
       run: docker pull ademirgava/placarbr-api:latest
+    - name: Remover docker container
+      run: docker rm -f deploy_placarbr_dev
     - name: Run docker conteinar
       run: docker run -d -p 8080:8080 -e DATABASE_DEV_USERNAME=${{secrets.DATABASE_DEV_USERNAME}} -e DATABASE_DEV_PASSWORD='${{secrets.DATABASE_DEV_PASSWORD}}' -e DATABASE_DEV_URL=${{secrets.DATABASE_DEV_URL}} --name deploy_placarbr_dev ademirgava/placarbr-api
