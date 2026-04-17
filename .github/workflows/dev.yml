@@ -1,12 +1,38 @@
-name: Deploy App Placar BR - dev
+name: Deploy Placar Br - Develop 0.0.1
 
 on:
   push:
     branches: [ "develop" ]
 
 jobs:
-	build:
-		runs-on: ubuntu-lastest
-		steps:
-			- name: Checkout code
-			  uses: actions/checkout@v3
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean install -DskipTests -P dev
+    - name: Login Docker Hub
+      run: docker login -u ${{secrets.DOCKER_USER_NAME}} -p ${{secrets.DOCKER_PASSWORD}}
+    - name: Builder docker image
+      run: docker build -t ademirgava/placarbr-api .
+    - name: Push image docker
+      run: docker push ademirgava/placarbr-api
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+    - name: Pull image from docker hub
+      run: docker pull ademirgava/placarbr-api:latest
+    - name: Remover docker container
+      run: docker rm -f deploy_placarbr_dev
+    - name: Run docker conteinar
+      run: docker run -d -p 8080:8080 -e DATABASE_DEV_USERNAME=${{secrets.DATABASE_DEV_USERNAME}} -e DATABASE_DEV_PASSWORD='${{secrets.DATABASE_DEV_PASSWORD}}' -e DATABASE_DEV_URL=${{secrets.DATABASE_DEV_URL}} --name deploy_placarbr_dev ademirgava/placarbr-api
