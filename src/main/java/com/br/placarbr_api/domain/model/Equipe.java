@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import com.br.placarbr_api.domain.dto.EquipeAtualizaDTO;
 import com.br.placarbr_api.domain.dto.EquipeCadastroDTO;
+import com.br.placarbr_api.infra.persistence.endereco.EnderecoEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,9 +52,9 @@ public class Equipe {
 	private String corSecundaria;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	private Endereco endereco;
+	private EnderecoEntity endereco;
 	
-	public Equipe(EquipeCadastroDTO dados, Endereco endereco) {
+	public Equipe(EquipeCadastroDTO dados, EnderecoEntity endereco) {
 		this.ativo = true;
 		this.dataCriacao = LocalDateTime.now();
 

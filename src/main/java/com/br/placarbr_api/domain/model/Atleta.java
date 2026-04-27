@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 
 import com.br.placarbr_api.domain.dto.AtletaAtualizaDTO;
 import com.br.placarbr_api.domain.dto.AtletaCadastroDTO;
+import com.br.placarbr_api.infra.persistence.endereco.EnderecoEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,14 +59,14 @@ public class Atleta {
 	private String celular;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	private Endereco endereco;
+	private EnderecoEntity endereco;
 
 	private LocalDateTime dataCriacao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Equipe equipe;
 
-	public Atleta(AtletaCadastroDTO dto, Endereco endereco) {
+	public Atleta(AtletaCadastroDTO dto, EnderecoEntity endereco) {
 		this.nome = dto.nome();
 		this.apelido = dto.apelido();
 		this.descricao = dto.descricao();
@@ -90,7 +91,7 @@ public class Atleta {
 		this.dataNascimento = dto.dataNascimento();
 		this.email = dto.email();
 		this.celular = dto.celular();
-		this.endereco.atualizar(dto.endereco());
+//		this.endereco.atualizar(dto.endereco());
 	}
 	
 	public void vincularEquipe(Equipe equipe) {

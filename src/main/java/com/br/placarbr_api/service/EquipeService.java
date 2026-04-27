@@ -11,9 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.br.placarbr_api.domain.dto.EquipeAtualizaDTO;
 import com.br.placarbr_api.domain.dto.EquipeCadastroDTO;
 import com.br.placarbr_api.domain.dto.EquipeDetalhamentoDTO;
-import com.br.placarbr_api.domain.model.Endereco;
 import com.br.placarbr_api.domain.model.Equipe;
 import com.br.placarbr_api.infra.exception.NotFoundExecption;
+import com.br.placarbr_api.infra.persistence.endereco.EnderecoEntity;
 import com.br.placarbr_api.repository.EquipeRepository;
 
 import jakarta.validation.Valid;
@@ -28,7 +28,7 @@ public class EquipeService {
 	private EnderecoService enderecoService;
 
 	public EquipeDetalhamentoDTO cadastrar(EquipeCadastroDTO dto) {
-		Endereco endereco = enderecoService.cadastrar(dto.endereco());
+		EnderecoEntity endereco = enderecoService.cadastrar(dto.endereco());
 		Equipe novaEquipe = new Equipe(dto, endereco);
 		Equipe equipe = repository.save(novaEquipe);
 		return new EquipeDetalhamentoDTO(equipe);
