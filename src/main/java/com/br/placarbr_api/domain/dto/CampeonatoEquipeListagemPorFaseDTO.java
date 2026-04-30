@@ -3,6 +3,7 @@ package com.br.placarbr_api.domain.dto;
 import java.util.List;
 
 import com.br.placarbr_api.domain.model.CampeonatoEquipe;
+import com.br.placarbr_api.infra.controller.equipe.dto.EquipeListagemDTO;
 
 public record CampeonatoEquipeListagemPorFaseDTO(CampeonatoListagemDTO campeonato, CampeonatoFaseListagemDTO campeonatoFase ,List<EquipeListagemDTO> equipes) {
 

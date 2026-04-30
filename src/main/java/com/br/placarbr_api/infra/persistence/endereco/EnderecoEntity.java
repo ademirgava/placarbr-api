@@ -1,8 +1,9 @@
 package com.br.placarbr_api.infra.persistence.endereco;
 
-import com.br.placarbr_api.domain.model.Atleta;
-import com.br.placarbr_api.domain.model.Equipe;
+import com.br.placarbr_api.domain.entities.Endereco;
+import com.br.placarbr_api.infra.persistence.atleta.AtletaEntity;
 import com.br.placarbr_api.infra.persistence.comissao_tecnica.ComissaoTecnicaEntity;
+import com.br.placarbr_api.infra.persistence.equipe.EquipeEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -39,10 +40,10 @@ public class EnderecoEntity {
 	private String complemento;
 
 	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-	private Atleta jogador;
+	private AtletaEntity jogador;
 
 	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-	private Equipe equipe;
+	private EquipeEntity equipe;
 
 	@OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
 	private ComissaoTecnicaEntity comissaoTecnicaEntity;
@@ -57,6 +58,16 @@ public class EnderecoEntity {
 		this.uf = uf;
 		this.cep = cep;
 		this.complemento = complemento;
+	}
+
+	public void update(Endereco endereco) {
+		this.logradouro = endereco.getLogradouro();
+		this.numero = endereco.getNumero();
+		this.bairro = endereco.getBairro();
+		this.cidade = endereco.getCidade();
+		this.uf = endereco.getUf();
+		this.cep = endereco.getCep();
+		this.complemento = endereco.getComplemento();		
 	}
 
 }

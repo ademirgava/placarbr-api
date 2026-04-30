@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.br.placarbr_api.domain.model.CampeonatoFase;
 import com.br.placarbr_api.domain.model.TipoFase;
+import com.br.placarbr_api.infra.controller.equipe.dto.EquipeListagemDTO;
 
 public record CampeonatoFaseListagemDTO(Long id, String nome,String descricao,TipoFase tipoFase,Integer classificados, Integer quantidadeGrupos, Integer quantidadeTimes, Boolean idaVolta, Integer ordemFase, List<EquipeListagemDTO> equipes) {
 

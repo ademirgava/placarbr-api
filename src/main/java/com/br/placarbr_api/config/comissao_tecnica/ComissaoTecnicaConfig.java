@@ -4,10 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.placarbr_api.application.gateways.comissao_tecnica.RepositorioDeComissaoTecnica;
+import com.br.placarbr_api.application.usecases.comissao_tecnica.AtualizarComissaoTecnica;
 import com.br.placarbr_api.application.usecases.comissao_tecnica.BuscarPorIdComissaoTecnica;
 import com.br.placarbr_api.application.usecases.comissao_tecnica.CriarComissaoTecnica;
 import com.br.placarbr_api.application.usecases.comissao_tecnica.ListarTodoComissaoTecnica;
 import com.br.placarbr_api.application.usecases.comissao_tecnica_tipo.BuscarComissaoTecnicaTipoPorId;
+import com.br.placarbr_api.application.usecases.endereco.AtualizarEndereco;
 import com.br.placarbr_api.application.usecases.endereco.CriarEndereco;
 import com.br.placarbr_api.infra.gateways.comissao_tecnica.ComissaoTecnicaMapper;
 import com.br.placarbr_api.infra.gateways.comissao_tecnica.RepositorioDeComissaoTecnicaJPA;
@@ -27,10 +29,15 @@ public class ComissaoTecnicaConfig {
 	BuscarPorIdComissaoTecnica buscarPorIdComissaoTecnica(RepositorioDeComissaoTecnica repositorio) {
 		return new BuscarPorIdComissaoTecnica(repositorio);
 	}
-	
+
 	@Bean
 	ListarTodoComissaoTecnica listarTodoComissaoTecnica(RepositorioDeComissaoTecnica repositorio) {
 		return new ListarTodoComissaoTecnica(repositorio);
+	}
+
+	@Bean
+	AtualizarComissaoTecnica atualizarComissaoTecnica(RepositorioDeComissaoTecnica repositorio, AtualizarEndereco atualizarEndereco) {
+		return new AtualizarComissaoTecnica(repositorio, atualizarEndereco);
 	}
 
 	@Bean

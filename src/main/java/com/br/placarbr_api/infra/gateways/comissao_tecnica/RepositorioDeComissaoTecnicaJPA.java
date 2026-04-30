@@ -63,4 +63,11 @@ public class RepositorioDeComissaoTecnicaJPA implements RepositorioDeComissaoTec
 		return new Pagina<>(paginaEntity.getContent().stream().map(mapper::toDomain).toList(), paginaEntity.getNumber(), paginaEntity.getSize(), paginaEntity.getTotalElements());
 	}
 
+	@Override
+	public ComissaoTecnica atualizar(ComissaoTecnica comissaoTecnica) {
+		ComissaoTecnicaEntity entity = repository.getReferenceById(comissaoTecnica.getId());
+		entity.update(comissaoTecnica);
+		return mapper.toDomain(entity);
+	}
+
 }

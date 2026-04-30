@@ -1,7 +1,8 @@
 package com.br.placarbr_api.infra.gateways.endereco;
 
-import com.br.placarbr_api.domain.dto.EnderecoCadastroDTO;
 import com.br.placarbr_api.domain.entities.Endereco;
+import com.br.placarbr_api.infra.controller.endereco.EnderecoAtualizaDTO;
+import com.br.placarbr_api.infra.controller.endereco.EnderecoCadastroDTO;
 import com.br.placarbr_api.infra.persistence.endereco.EnderecoEntity;
 
 public class EnderecoEntityMapper {
@@ -18,5 +19,9 @@ public class EnderecoEntityMapper {
 
 	public EnderecoEntity toEntity(Endereco domain) {
 		return new EnderecoEntity(domain.getId(), domain.getLogradouro(), domain.getNumero(), domain.getBairro(), domain.getCidade(), domain.getUf(), domain.getCep(), domain.getComplemento());
+	}
+
+	public Endereco toDomain(EnderecoAtualizaDTO domain) {
+		return new Endereco(domain.id(), domain.logradouro(), domain.numero(), domain.bairro(), domain.cidade(), domain.uf(), domain.cep(), domain.complemento());
 	}
 }

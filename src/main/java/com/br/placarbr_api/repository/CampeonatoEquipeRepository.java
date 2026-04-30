@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.domain.model.CampeonatoEquipe;
 import com.br.placarbr_api.domain.model.CampeonatoFase;
-import com.br.placarbr_api.domain.model.Equipe;
+import com.br.placarbr_api.infra.persistence.equipe.EquipeEntity;
 
 public interface CampeonatoEquipeRepository extends JpaRepository<CampeonatoEquipe, Long> {
 
@@ -17,6 +17,6 @@ public interface CampeonatoEquipeRepository extends JpaRepository<CampeonatoEqui
 
 	List<CampeonatoEquipe> findAllByCampeonatoAndCampeonatoFase(Campeonato campeonato, CampeonatoFase campeonatoFase);
 
-	boolean existsByCampeonatoAndCampeonatoFaseAndEquipe(Campeonato campeonato, CampeonatoFase campeonatoFase, Equipe equipe);
+	boolean existsByCampeonatoAndCampeonatoFaseAndEquipe(Campeonato campeonato, CampeonatoFase campeonatoFase, EquipeEntity equipe);
 
 }

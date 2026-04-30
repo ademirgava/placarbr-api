@@ -12,4 +12,7 @@ public interface RepositorioDeComissaoTecnica {
 
 	Pagina<ComissaoTecnica> listar(Paginacao paginacao);
 
+	ComissaoTecnica atualizar(ComissaoTecnica comissaoTecnica);
+
+
 }

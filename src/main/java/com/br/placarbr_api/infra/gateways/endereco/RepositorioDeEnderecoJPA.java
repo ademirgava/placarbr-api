@@ -21,4 +21,11 @@ public class RepositorioDeEnderecoJPA implements RepositorioDeEndereco{
 		return mapper.toDomain(repository.save(entity));
 	}
 
+	@Override
+	public Endereco atualizar(Endereco endereco) {
+		EnderecoEntity entity = repository.getReferenceById(endereco.getId());
+		entity.update(endereco);
+		return mapper.toDomain(entity);
+	}
+
 }

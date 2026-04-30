@@ -34,7 +34,6 @@ public class ComissaoTecnica {
 	public ComissaoTecnica(Long id, String cpf, String rg, String registro, String registroTipo, String nome,
 			String email, String apelido, LocalDate dataNascimento, byte[] foto, String descricao, String celular,
 			LocalDateTime dataCriacao, Endereco endereco, ComissaoTecnicaTipo comissaoTecnicaTipo) {
-		super();
 		this.id = id;
 		this.cpf = cpf;
 		this.rg = rg;
@@ -70,4 +69,20 @@ public class ComissaoTecnica {
 		this.comissaoTecnicaTipo = comissaoTecnicaTipo;
 	}
 
+	public ComissaoTecnica(Long id, String cpf, String rg, String registro, String registroTipo, String nome,
+			String email, String apelido, LocalDate dataNascimento, String descricao, String celular, Endereco endereco, ComissaoTecnicaTipo comissaoTecnicaTipo) {
+		this.id = id;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.registro = registro;
+		this.registroTipo = registroTipo;
+		this.nome = nome;
+		this.email = email;
+		this.apelido = apelido;
+		this.dataNascimento = dataNascimento;
+		this.descricao = descricao;
+		this.celular = celular;
+		this.endereco = endereco;
+		this.comissaoTecnicaTipo = comissaoTecnicaTipo;
+	}
 }

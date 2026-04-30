@@ -10,8 +10,8 @@ import com.br.placarbr_api.domain.dto.CampeonatoJogoDetalhamentoDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.domain.model.CampeonatoFase;
 import com.br.placarbr_api.domain.model.CampeonatoJogo;
-import com.br.placarbr_api.domain.model.Equipe;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
+import com.br.placarbr_api.infra.persistence.equipe.EquipeEntity;
 import com.br.placarbr_api.repository.CameponatoJogoRepository;
 
 @Service
@@ -48,8 +48,8 @@ public class CampeonatoJogoService {
 		
 		Campeonato campeonato = campeonatoService.buscarCampeonatoPorId(dto.campeonatoId());
 		CampeonatoFase fase = faseService.buscarCampeonatoFasePorId(dto.campeonatoFaseId());
-		Equipe equipeVisitante = equipeService.buscarEquipePeloIdReference(dto.cameponatoTimeVisitanteId());
-		Equipe equipeMandante = equipeService.buscarEquipePeloIdReference(dto.cameponatoTimeMandateId());
+		EquipeEntity equipeVisitante = equipeService.buscarEquipePeloIdReference(dto.cameponatoTimeVisitanteId());
+		EquipeEntity equipeMandante = equipeService.buscarEquipePeloIdReference(dto.cameponatoTimeMandateId());
 		
 		return new CampeonatoJogoDetalhamentoDTO(repository.save(new CampeonatoJogo(dto.rodada(), equipeVisitante, equipeMandante, fase, campeonato)));
 	}

@@ -26,7 +26,6 @@ public class Endereco {
 
 	public Endereco(String logradouro, String numero, String bairro, String cidade, String uf, String cep,
 			String complemento) {
-		super();
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.bairro = bairro;
@@ -34,6 +33,13 @@ public class Endereco {
 		this.uf = uf;
 		this.cep = cep;
 		this.complemento = complemento;
+	}
+
+	public boolean isEnderecoValido() {
+		if (this.logradouro.isBlank() || this.numero.isBlank() || this.bairro.isBlank() || this.cidade.isBlank() || this.uf.isBlank() || this.cep.isBlank()) {
+			return false;
+		}
+		return true;
 	}
 
 }

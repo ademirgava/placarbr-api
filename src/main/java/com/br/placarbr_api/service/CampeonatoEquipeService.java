@@ -11,8 +11,8 @@ import com.br.placarbr_api.domain.dto.CampeonatoEquipeListagemPorCampeonatoDTO;
 import com.br.placarbr_api.domain.model.Campeonato;
 import com.br.placarbr_api.domain.model.CampeonatoEquipe;
 import com.br.placarbr_api.domain.model.CampeonatoFase;
-import com.br.placarbr_api.domain.model.Equipe;
 import com.br.placarbr_api.infra.exception.ValidacaoException;
+import com.br.placarbr_api.infra.persistence.equipe.EquipeEntity;
 import com.br.placarbr_api.repository.CampeonatoEquipeRepository;
 
 @Service
@@ -32,7 +32,7 @@ public class CampeonatoEquipeService {
 	
 	public CampeonatoEquipeDetalhamentoDTO cadastrar(CampeonatoEquipeCadastraDTO dto) {
 		Campeonato campeonato = campeonatoService.buscarCampeonatoPorId(dto.campeonatoId());
-		Equipe equipe = equipeService.buscarEquipePeloIdReference(dto.equipeId());
+		EquipeEntity equipe = equipeService.buscarEquipePeloIdReference(dto.equipeId());
 		CampeonatoFase campeonatoFase = campeonatoFaseService.buscarCampeonatoFasePorIdECampeonatoId(dto.campeonatoFaseId(), dto.campeonatoId());
 		
 		if (repository.existsByCampeonatoAndCampeonatoFaseAndEquipe(campeonato, campeonatoFase, equipe)) {

@@ -19,6 +19,9 @@ import com.br.placarbr_api.domain.entities.Pagina;
 import com.br.placarbr_api.domain.entities.Paginacao;
 import com.br.placarbr_api.domain.entities.comissao_tecnica_tipo.ComissaoTecnicaTipo;
 import com.br.placarbr_api.infra.controller.PageResult;
+import com.br.placarbr_api.infra.controller.comissao_tecnica_tipo.dto.ComissaoTecnicaTipoAtualizaDTO;
+import com.br.placarbr_api.infra.controller.comissao_tecnica_tipo.dto.ComissaoTecnicaTipoCadastraDTO;
+import com.br.placarbr_api.infra.controller.comissao_tecnica_tipo.dto.ComissaoTecnicaTipoDetalheDTO;
 import com.br.placarbr_api.infra.gateways.comissao_tecnica_tipo.ComissaoTecnicaTipoEntityMapper;
 
 import jakarta.transaction.Transactional;

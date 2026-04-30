@@ -6,4 +6,6 @@ public interface RepositorioDeEndereco {
 
 	Endereco cadastrarEndreco(Endereco endereco);
 
+	Endereco atualizar(Endereco endereco);
+
 }

@@ -1,5 +1,7 @@
 package com.br.placarbr_api.domain.model;
 
+import com.br.placarbr_api.infra.persistence.equipe.EquipeEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,18 +34,18 @@ public class CampeonatoJogo {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "equipe_mandante_id")
-	private Equipe equipeMandante;
+	private EquipeEntity equipeMandante;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "equipe_visitante_id")
-	private Equipe equipeVisitante;
+	private EquipeEntity equipeVisitante;
 
 	private Integer rodada;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private CampeonatoFase campeonatoFase;
 
-	public CampeonatoJogo(Integer rodada, Equipe timeVisitante, Equipe timeMandante,
+	public CampeonatoJogo(Integer rodada, EquipeEntity timeVisitante, EquipeEntity timeMandante,
 			CampeonatoFase fase, Campeonato campeonato) {
 		this.rodada = rodada;
 		this.equipeVisitante = timeVisitante;

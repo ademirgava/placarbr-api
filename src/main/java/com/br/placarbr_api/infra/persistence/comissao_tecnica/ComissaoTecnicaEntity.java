@@ -3,6 +3,7 @@ package com.br.placarbr_api.infra.persistence.comissao_tecnica;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.br.placarbr_api.domain.entities.comissao_tecnica.ComissaoTecnica;
 import com.br.placarbr_api.infra.persistence.comissao_tecnica_tipo.ComissaoTecnicaTipoEntity;
 import com.br.placarbr_api.infra.persistence.endereco.EnderecoEntity;
 
@@ -53,7 +54,6 @@ public class ComissaoTecnicaEntity {
 	public ComissaoTecnicaEntity(String cpf, String rg, String registro, String registroTipo, String nome, String email,
 			String apelido, LocalDate dataNascimento, byte[] foto, String descricao, String celular,
 			LocalDateTime dataCriacao) {
-		super();
 		this.cpf = cpf;
 		this.rg = rg;
 		this.registro = registro;
@@ -66,6 +66,20 @@ public class ComissaoTecnicaEntity {
 		this.descricao = descricao;
 		this.celular = celular;
 		this.dataCriacao = dataCriacao;
+	}
+
+	public void update(ComissaoTecnica comissaoTecnica) {
+		this.cpf = comissaoTecnica.getCpf();
+		this.rg = comissaoTecnica.getRg();
+		this.registro = comissaoTecnica.getRegistro();
+		this.registroTipo = comissaoTecnica.getRegistroTipo();
+		this.nome = comissaoTecnica.getNome();
+		this.email = comissaoTecnica.getEmail();
+		this.apelido = comissaoTecnica.getApelido();
+		this.dataNascimento = comissaoTecnica.getDataNascimento();
+		this.foto = comissaoTecnica.getFoto();
+		this.descricao = comissaoTecnica.getDescricao();
+		this.celular = comissaoTecnica.getCelular();
 	}
 
 	

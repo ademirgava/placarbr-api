@@ -1,5 +1,7 @@
 package com.br.placarbr_api.domain.model;
 
+import com.br.placarbr_api.infra.persistence.equipe.EquipeEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +29,7 @@ public class CampeonatoEquipe {
 	private Campeonato campeonato;
 
 	@ManyToOne
-	private Equipe equipe;
+	private EquipeEntity equipe;
 
 	@ManyToOne
 	private CampeonatoFase campeonatoFase;
