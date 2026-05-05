@@ -32,6 +32,11 @@ public class TratadorDeErros {
 	public ResponseEntity tratrErroNotFound(NotFoundExecption execption) {
 		return ResponseEntity.badRequest().body(execption.getMessage());
 	}
+	
+	@ExceptionHandler(ExternalApiException.class)
+	public ResponseEntity tratarExternalApiExcepiton(ExternalApiException exception) {
+		return ResponseEntity.badRequest().body(exception.getMessage());
+	}
 
 	private record DadosErroValidacao(String campo, String mensagem) {
 

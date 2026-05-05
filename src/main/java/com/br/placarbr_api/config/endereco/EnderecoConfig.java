@@ -1,10 +1,12 @@
 package com.br.placarbr_api.config.endereco;
 
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.br.placarbr_api.application.gateways.endereco.RepositorioDeEndereco;
 import com.br.placarbr_api.application.usecases.endereco.AtualizarEndereco;
+import com.br.placarbr_api.application.usecases.endereco.BuscarViaCepEnedereco;
 import com.br.placarbr_api.application.usecases.endereco.CriarEndereco;
 import com.br.placarbr_api.infra.gateways.endereco.EnderecoEntityMapper;
 import com.br.placarbr_api.infra.gateways.endereco.RepositorioDeEnderecoJPA;
@@ -24,8 +26,13 @@ public class EnderecoConfig {
 	}
 	
 	@Bean
-	RepositorioDeEndereco repositorioDeEndereco(EnderecoRepository repository, EnderecoEntityMapper mapper) {
-		return new RepositorioDeEnderecoJPA(repository, mapper);
+	BuscarViaCepEnedereco buscarViaCepEnedereco(RepositorioDeEndereco repositorio) {
+		return new BuscarViaCepEnedereco(repositorio);
+	}
+	
+	@Bean
+	RepositorioDeEndereco repositorioDeEndereco(EnderecoRepository repository, EnderecoEntityMapper mapper, RestTemplateBuilder restTemplateBuilder) {
+		return new RepositorioDeEnderecoJPA(repository, mapper, restTemplateBuilder);
 	}
 	
 	@Bean

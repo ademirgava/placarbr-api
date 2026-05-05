@@ -8,4 +8,6 @@ public interface RepositorioDeEndereco {
 
 	Endereco atualizar(Endereco endereco);
 
+	Endereco buscarViaCep(String cep);
+
 }
